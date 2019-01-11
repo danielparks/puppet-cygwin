@@ -40,7 +40,8 @@ Puppet::Type.type(:package).provide(:cygwin, :parent => Puppet::Provider::Packag
         @install_dir = reg['rootdir'].tr '/', '\\'
       end
     rescue StandardError => e
-      Puppet.debug e
+      Puppet.warn e
+      nil
     end
   end
 
@@ -91,8 +92,8 @@ Puppet::Type.type(:package).provide(:cygwin, :parent => Puppet::Provider::Packag
       end
 
     rescue StandardError => e
-      Puppet.debug "Failed to parse line: #{line}"
-      Puppet.debug e
+      Puppet.warn "Failed to parse line: #{line}"
+      Puppet.warn e
 
     end
 
@@ -150,7 +151,7 @@ Puppet::Type.type(:package).provide(:cygwin, :parent => Puppet::Provider::Packag
       end
 
     rescue StandardError => e
-      Puppet.debug e
+      Puppet.warn e
 
     end
 
