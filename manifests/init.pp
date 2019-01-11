@@ -4,6 +4,10 @@
 #
 # == Parameters
 #
+# [*enable*]
+#   Whether or not to install Cygwin. If you wish to use cygwin::windows_path()
+#   on non-Cygwin nodes, you should set this to false. This defaults to true.
+#
 # [*install_root*]
 #   The root of the Cygwin install, this defaults to 'C:\Cygwin' on
 #   x86 systems, and 'C:\Cygwin64' on x86_64 systems.
@@ -22,6 +26,7 @@
 #   Defines an array of packages to install after Cygwin is installed
 #
 class cygwin (
+  $enable       = true,
   $install_root = $cygwin::params::install_root,
   $host         = $cygwin::params::host,
   $mirror       = $cygwin::params::mirror,
@@ -30,7 +35,9 @@ class cygwin (
   $packages     = {},
 ) inherits cygwin::params {
 
-  include cygwin::install
+  if $enable {
+    include cygwin::install
 
-  create_resources('cygwin::package', $packages)
+    create_resources('cygwin::package', $packages)
+  }
 }
