@@ -33,6 +33,7 @@ Puppet::Type.type(:package).provide(:cygwin, :parent => Puppet::Provider::Packag
   def self.install_dir
     return @install_dir if @install_dir
 
+    require 'Win32API'
     require 'win32/registry'
 
     begin
