@@ -13,6 +13,9 @@ Puppet::Type.type(:package).provide(:cygwin, :parent => Puppet::Provider::Packag
   has_feature :install_options
   has_feature :source
 
+  # Used to ensure that cygwin is installed before trying to install packages
+  has_feature :cygwin
+
   attr_reader :install_dir
 
   self::REGISTRY_KEY = 'SOFTWARE\Cygwin\setup'

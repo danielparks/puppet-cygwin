@@ -73,6 +73,4 @@ class cygwin::install(
       mode               => '0755',
       require            => Exec['Install Cygwin'];
   }
-
-  File["${install_root}\\bin\\setup.exe"] -> Package <| provider == 'cygwin' |>
 }
